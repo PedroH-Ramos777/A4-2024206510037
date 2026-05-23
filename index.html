@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dragon Ball Super Cards - Simulador de batalha de cards com personagens da série Dragon Ball Super">
+  <title>Dragon Ball Super Cards - Batalha de Cards</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&family=Russo+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Animated background particles -->
+  <div class="bg-particles" id="bgParticles"></div>
+
+  <!-- Main Title Banner -->
+  <header class="app-header">
+    <button class="btn-menu" id="btnMenu" onclick="toggleMenu()" aria-label="Abrir Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+    <div class="header-titles">
+      <h1 class="app-title">
+        <span class="title-dragon">DRAGON</span>
+        <span class="title-ball">BALL</span>
+        <span class="title-super">SUPER</span>
+      </h1>
+      <p class="app-subtitle">CARD BATTLE SIMULATOR</p>
+    </div>
+  </header>
+
+  <!-- Battle Arena -->
+  <main class="battle-arena step-1" id="battleArena">
+    <!-- Player 1 Card -->
+    <section class="card-column" id="player1Section">
+      <div class="player-label">PLAYER 1</div>
+
+      <!-- Stack Container -->
+      <div class="card-stack" id="card1Stack">
+        <img src="https://img.pikbest.com/backgrounds/20190617/particle-black-gold-wind-gif-background_2854537.jpg!w700wp" alt="" class="stack-bg" loading="lazy">
+        <img src="https://media1.tenor.com/images/03df2121d9c321ce7316dea61fe04df0/tenor.gif?itemid=5183679" alt="" class="stack-gif" loading="lazy">
+        <img src="" alt="Personagem" class="stack-character" id="char1Image">
+        <!-- SVG title overlay -->
+        <div class="stack-title-overlay">
+          <svg class="stack-logo" viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg" aria-label="DBS Super Cards">
+            <defs>
+              <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffd700"/>
+                <stop offset="50%" stop-color="#ff6a00"/>
+                <stop offset="100%" stop-color="#ff2d55"/>
+              </linearGradient>
+            </defs>
+            <text x="50%" y="28" font-family="'Russo One', sans-serif" font-weight="400" font-size="22" fill="url(#g1)" stroke="#000" stroke-width="2.5" text-anchor="middle" letter-spacing="4">D B S</text>
+            <text x="50%" y="44" font-family="'Chakra Petch', sans-serif" font-weight="600" font-size="9" fill="#00b4ff" text-anchor="middle" letter-spacing="3">SUPER CARDS</text>
+          </svg>
+        </div>
+        <!-- Push to Play button -->
+        <button class="btn-play" id="btn1Play" onclick="generateCharacter(1)">
+          <!-- SVG dragon icon instead of emoji -->
+          <svg class="btn-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A6.5 6.5 0 0 0 3 8.5c0 5 6.5 10 6.5 10S16 13.5 16 8.5A6.5 6.5 0 0 0 9.5 2z"/><circle cx="17" cy="6" r="4"/><path d="m14.5 9 2 2"/></svg>
+          <span>PUSH TO PLAY</span>
+          <span class="btn-glow"></span>
+        </button>
+        <!-- Loading spinner -->
+        <div class="loading-spinner" id="loader1">
+          <div class="spinner-ring"></div>
+          <p>Invocando guerreiro...</p>
+        </div>
+      </div>
+
+      <!-- Info Container -->
+      <div class="card-info" id="card1Info">
+        <h2 class="char-name" id="char1Name">???</h2>
+        <div class="stats-row">
+          <div class="stats-col">
+            <div class="stat-box">
+              <div class="stat-col">
+                <span class="stat-label">
+                  <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                  KI
+                </span>
+                <span class="stat-value" id="char1Ki">---</span>
+              </div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-col">
+                <span class="stat-label">
+                  <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8m-4-4h8"/></svg>
+                  RAÇA
+                </span>
+                <span class="stat-value" id="char1Race">---</span>
+              </div>
+            </div>
+          </div>
+          <div class="stats-col">
+            <div class="stat-box">
+              <div class="stat-col">
+                <span class="stat-label">
+                  <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14 0-5.5 3.5-7.5-2 3.5-.5 5.5 0 7 .5 2 1.5 3 1.5 5a2.5 2.5 0 0 1-5 0"/></svg>
+                  MAX KI
+                </span>
+                <span class="stat-value" id="char1MaxKi">---</span>
+              </div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-col">
+                <span class="stat-label">
+                  <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  GRUPO
+                </span>
+                <span class="stat-value" id="char1Affiliation">---</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VS Divider -->
+    <div class="vs-divider" id="vsDivider">
+      <div class="vs-lightning"></div>
+      <div class="vs-badge">
+        <span class="vs-text">VS</span>
+      </div>
+      <div class="vs-lightning"></div>
+      <button class="btn-battle" id="btnBattle" onclick="startBattle()">
+        <svg class="btn-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/>
+          <line x1="13" y1="19" x2="19" y2="13"/>
+          <line x1="16" y1="16" x2="20" y2="20"/>
+          <line x1="19" y1="21" x2="21" y2="19"/>
+          <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/>
+          <line x1="5" y1="14" x2="9" y2="18"/>
+          <line x1="7" y1="17" x2="4" y2="20"/>
+          <line x1="3" y1="19" x2="5" y2="21"/>
+        </svg>
+        <span>BATALHAR!</span>
+      </button>
+    </div>
+
+    <!-- Player 2 Card -->
+    <section class="card-column" id="player2Section">
+      <div class="player-label">PLAYER 2</div>
+
+      <div class="card-stack" id="card2Stack">
+        <img src="https://img.pikbest.com/backgrounds/20190617/particle-black-gold-wind-gif-background_2854537.jpg!w700wp" alt="" class="stack-bg" loading="lazy">
+        <img src="https://media1.tenor.com/images/03df2121d9c321ce7316dea61fe04df0/tenor.gif?itemid=5183679" alt="" class="stack-gif" loading="lazy">
+        <img src="" alt="Personagem" class="stack-character" id="char2Image">
+        <div class="stack-title-overlay">
+          <svg class="stack-logo" viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg" aria-label="DBS Super Cards">
+            <defs>
+              <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffd700"/>
+                <stop offset="50%" stop-color="#ff6a00"/>
+                <stop offset="100%" stop-color="#ff2d55"/>
+              </linearGradient>
+            </defs>
+            <text x="50%" y="28" font-family="'Russo One', sans-serif" font-weight="400" font-size="22" fill="url(#g2)" stroke="#000" stroke-width="2.5" text-anchor="middle" letter-spacing="4">D B S</text>
+            <text x="50%" y="44" font-family="'Chakra Petch', sans-serif" font-weight="600" font-size="9" fill="#00b4ff" text-anchor="middle" letter-spacing="3">SUPER CARDS</text>
+          </svg>
+        </div>
+        <button class="btn-play" id="btn2Play" onclick="generateCharacter(2)">
+          <svg class="btn-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A6.5 6.5 0 0 0 3 8.5c0 5 6.5 10 6.5 10S16 13.5 16 8.5A6.5 6.5 0 0 0 9.5 2z"/><circle cx="17" cy="6" r="4"/><path d="m14.5 9 2 2"/></svg>
+          <span>PUSH TO PLAY</span>
+          <span class="btn-glow"></span>
+        </button>
+        <div class="loading-spinner" id="loader2">
+          <div class="spinner-ring"></div>
+          <p>Invocando guerreiro...</p>
+        </div>
+      </div>
+
+      <div class="card-info" id="card2Info">
+        <h2 class="char-name" id="char2Name">???</h2>
+        <div class="stats-row">
+          <div class="stats-col">
+            <div class="stat-box">
+              <div class="stat-col">
+                <span class="stat-label">
+                  <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                  KI
+                </span>
+                <span class="stat-value" id="char2Ki">---</span>
+              </div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-col">
+                <span class="stat-label">
+                  <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8m-4-4h8"/></svg>
+                  RAÇA
+                </span>
+                <span class="stat-value" id="char2Race">---</span>
+              </div>
+            </div>
+          </div>
+          <div class="stats-col">
+            <div class="stat-box">
+              <div class="stat-col">
+                <span class="stat-label">
+                  <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14 0-5.5 3.5-7.5-2 3.5-.5 5.5 0 7 .5 2 1.5 3 1.5 5a2.5 2.5 0 0 1-5 0"/></svg>
+                  MAX KI
+                </span>
+                <span class="stat-value" id="char2MaxKi">---</span>
+              </div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-col">
+                <span class="stat-label">
+                  <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  GRUPO
+                </span>
+                <span class="stat-value" id="char2Affiliation">---</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Battle Result Modal -->
+  <div class="battle-modal" id="battleModal">
+    <div class="modal-content">
+      <div class="winner-aura"></div>
+      <img src="" alt="Vencedor" class="winner-image" id="winnerImage">
+      <h2 class="winner-title" id="winnerTitle">VENCEDOR!</h2>
+      <p class="winner-name" id="winnerName"></p>
+      <div class="winner-stats" id="winnerStats"></div>
+      <button class="btn-rematch" onclick="closeModal()">
+        <svg class="btn-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+        <span>NOVA BATALHA</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Side Menu (Scoreboard & Configs) -->
+  <aside class="side-menu" id="sideMenu">
+    <div class="menu-header">
+      <h2>MENU</h2>
+      <button class="btn-close" onclick="toggleMenu()" aria-label="Fechar Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="menu-content">
+      <div class="scoreboard-vertical">
+        <h3 class="scoreboard-title">PLACAR GERAL</h3>
+        <div class="score-item">
+          <span class="score-label">P1 WINS</span>
+          <span class="score-value" id="score1">0</span>
+        </div>
+        <div class="score-item total">
+          <span class="score-label">BATALHAS</span>
+          <span class="score-value" id="totalBattles">0</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">P2 WINS</span>
+          <span class="score-value" id="score2">0</span>
+        </div>
+      </div>
+      <button class="btn-reset" onclick="resetScores()">
+        <svg class="btn-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+        <span>ZERAR PLACAR</span>
+      </button>
+    </div>
+  </aside>
+  <!-- Overlay para fechar menu ao clicar fora -->
+  <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
