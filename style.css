@@ -34,21 +34,22 @@
   --font-body: 'Chakra Petch', sans-serif;
 
   /* Spacing & sizing — mobile base */
-  --card-w: 90vw;
-  --card-h: calc(var(--card-w) * 1.4);
-  --info-h: calc(var(--card-w) * 0.52);
+  --card-w: 85vw;
+  --card-h: calc(var(--card-w) * 1.35);
+  --info-h: calc(var(--card-w) * 0.48);
   --radius: 12px;
   --transition: 200ms ease;
 }
 
 body {
   font-family: var(--font-body);
-  background: var(--bg-primary);
+  background: linear-gradient(135deg, #2b1000 0%, #3d1500 50%, #2b1000 100%);
   color: var(--text-primary);
   min-height: 100dvh;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
+  background-attachment: fixed;
 }
 
 /* ===== PARTICLES ===== */
@@ -77,8 +78,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px;
-  min-height: 70px;
+  padding: 12px 16px;
+  min-height: 60px;
+  background: linear-gradient(135deg, rgba(255,106,0,.08), rgba(255,165,0,.04));
+  border-bottom: 2px solid rgba(255,165,0,.15);
 }
 .btn-menu {
   position: absolute;
@@ -102,21 +105,21 @@ body {
 }
 .app-title {
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   letter-spacing: 2px;
   display: flex;
   justify-content: center;
-  gap: 6px;
+  gap: 4px;
 }
 .title-dragon { color: var(--accent-orange); text-shadow: var(--glow-orange); }
 .title-ball   { color: var(--accent-gold);   text-shadow: var(--glow-gold); }
 .title-super  { color: var(--accent-blue);   text-shadow: var(--glow-blue); }
 .app-subtitle {
   font-family: var(--font-display);
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   color: var(--text-muted);
-  letter-spacing: 4px;
-  margin-top: 4px;
+  letter-spacing: 3px;
+  margin-top: 2px;
   animation: pulseGlow 2s ease-in-out infinite alternate;
 }
 @keyframes pulseGlow {
@@ -130,9 +133,10 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
-  padding: 16px;
+  gap: 12px;
+  padding: 12px;
   flex: 1;
+  justify-content: center;
 }
 
 /* ===== WIZARD STEPS ===== */
@@ -145,11 +149,14 @@ body {
   display: none !important;
 }
 .battle-arena.step-3 {
-  gap: 12px;
+  gap: 16px;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 .battle-arena.step-3 .card-column {
-  transform: scale(0.9);
-  margin: -10px 0;
+  transform: scale(0.85);
+  margin: 0;
 }
 
 /* ===== CARD COLUMN ===== */
@@ -161,11 +168,12 @@ body {
 }
 .player-label {
   font-family: var(--font-display);
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   letter-spacing: 2px;
   color: var(--accent-gold);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   text-shadow: var(--glow-gold);
+  text-transform: uppercase;
 }
 
 /* ===== CARD STACK ===== */
@@ -317,14 +325,14 @@ body {
 .card-info {
   width: var(--card-w);
   min-height: var(--info-h);
-  background: var(--bg-card);
+  background: linear-gradient(135deg, var(--bg-card), rgba(255,106,0,.05));
   border: 1px solid var(--border-stat);
-  border-top: 2px solid var(--accent-orange);
+  border-top: 3px solid var(--accent-orange);
   border-radius: 0 0 var(--radius) var(--radius);
-  padding: 6px;
+  padding: 8px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
   box-shadow: 0 8px 24px rgba(0,0,0,.35);
 }
 .char-name {
