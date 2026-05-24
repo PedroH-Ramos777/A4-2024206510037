@@ -11,11 +11,11 @@
 /* ===== DESIGN TOKENS ===== */
 :root {
   /* Colors — Gaming dark palette */
-  --bg-primary: #0F0F23;
-  --bg-card: #15152a;
-  --bg-stat: rgba(255,255,255,.04);
-  --accent-orange: #ff6a00;
-  --accent-gold: #ffd700;
+  --bg-primary: #2b1000;
+  --bg-card: #261200;
+  --bg-stat: rgba(255,165,0,.08);
+  --accent-orange: #ff8a23;
+  --accent-gold: #ffd56c;
   --accent-blue: #00b4ff;
   --accent-red: #F43F5E;
   --accent-purple: #7C3AED;
